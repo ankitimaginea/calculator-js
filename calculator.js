@@ -25,7 +25,7 @@ window.onload = function(){
 		'-' : {'priority': 1, 'func': minus},
 		'+' : {'priority': 1, 'func': add},
 		'/' : {'priority': 2, 'func': divide},
-		'*' : {'priority': 2, 'func': multiply},
+		'x' : {'priority': 2, 'func': multiply},
 		
 	};
 
@@ -98,10 +98,69 @@ window.onload = function(){
 			}
 		}
 
-    	return operandStack.pop() ;
+		var eval_res = operandStack.pop();
+
+		if (eval_res !== parseInt(eval_res, 10)){
+			eval_res = eval_res.toFixed(2);
+		}
+
+    	return eval_res;
 	}
 
 /*********************************************************************/
+	
+	var cal_scrn = document.getElementById("screen");
 
+	document.getElementById("clear").onclick =  function(){
+	    cal_scrn.innerHTML = "";
+	};
+
+	document.getElementById("eval").onclick =  function(){
+	    cal_scrn.innerHTML = eval_expr( cal_scrn.innerHTML );
+	};
+
+	document.getElementById("dec").onclick =  function(){
+		var expr = cal_scrn.innerHTML;
+		var i = expr.length-1;
+		var last_char = expr.charAt( i );
+
+		while(operators.indexOf(last_char) <= -1 && i >= 0){
+			if(last_char == '.'){
+				alert('operation not allowed');
+				return;
+			}
+			i -= 1;
+			var last_char = expr.charAt( i );
+		}
+		cal_scrn.innerHTML += '.';
+	    
+	};
+
+	var num_keys = document.querySelectorAll('.num');
+	for( var i in num_keys){
+		num_keys[i].onclick = function(e){
+			cal_scrn.innerHTML += this.innerHTML;
+		}
+	}
+
+	function check_add_operator(expr, operator){
+		// if last string is not an operator or any operator other than minus is used
+		// to start an expression
+		var length = expr.length;
+		if(length == 0 && operator !== '-'){
+			return ''
+		}
+		if(operators.indexOf( expr.charAt(length-1) ) > -1){
+			return expr;
+		}
+		return expr += operator;
+	}
+
+	var op_keys = document.querySelectorAll('.operator');
+	for( var i in op_keys){
+		op_keys[i].onclick = function(e){
+			cal_scrn.innerHTML = check_add_operator(cal_scrn.innerHTML, this.innerHTML);
+		}
+	}
 
 }
