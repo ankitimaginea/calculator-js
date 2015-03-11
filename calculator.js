@@ -80,6 +80,9 @@ window.onload = function(){
 	}
 
 	function eval_expr(expr){
+		if(expr[0] === '-'){
+			expr = '0'+expr;
+		}
 		var tokens = parser(expr);
 		var postfix_expr = expr_to_postfix(tokens);
 
@@ -119,6 +122,18 @@ window.onload = function(){
 	    cal_scrn.innerHTML = eval_expr( cal_scrn.innerHTML );
 	};
 
+	document.getElementById('num_pad').onclick = function(e){
+		if(e.target.nodeName === 'BUTTON'){
+			cal_scrn.innerHTML += e.target.innerHTML;
+		}
+	}
+
+	document.getElementById('op_pad').onclick = function(e){
+		if(e.target.nodeName === 'BUTTON'){
+			cal_scrn.innerHTML = check_add_operator(cal_scrn.innerHTML, e.target.innerHTML);
+		}
+	}
+
 	document.getElementById("dec").onclick =  function(){
 		var expr = cal_scrn.innerHTML;
 		var i = expr.length-1;
@@ -133,15 +148,7 @@ window.onload = function(){
 			var last_char = expr.charAt( i );
 		}
 		cal_scrn.innerHTML += '.';
-	    
 	};
-
-	var num_keys = document.querySelectorAll('.num');
-	for( var i in num_keys){
-		num_keys[i].onclick = function(e){
-			cal_scrn.innerHTML += this.innerHTML;
-		}
-	}
 
 	function check_add_operator(expr, operator){
 		// if last string is not an operator or any operator other than minus is used
@@ -154,13 +161,6 @@ window.onload = function(){
 			return expr;
 		}
 		return expr += operator;
-	}
-
-	var op_keys = document.querySelectorAll('.operator');
-	for( var i in op_keys){
-		op_keys[i].onclick = function(e){
-			cal_scrn.innerHTML = check_add_operator(cal_scrn.innerHTML, this.innerHTML);
-		}
 	}
 
 }
