@@ -13,7 +13,7 @@ CalculatorModel.prototype = {
     },
 
     setExpr : function (expr) {
-        this._expr = expr;
-        this.exprChanged .notify({ 'expr' : expr });
-    }
+        this._expr = expr.toString();
+        this.exprChanged.notify({ expr : expr });
+    },
 };

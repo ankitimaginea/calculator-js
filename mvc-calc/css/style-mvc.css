@@ -1,0 +1,117 @@
+/* Basic reset */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	
+	/* Better text styling */
+	font: bold 14px Arial, sans-serif;
+}
+
+/* Finally adding some IE9 fallbacks for gradients to finish things up */
+
+/* A nice BG gradient */
+html {
+	height: 100%;
+	background: white;
+	background: radial-gradient(circle, #fff 20%, #ccc);
+	background-size: cover;
+}
+
+/* Using box shadows to create 3D effects */
+#calculator {
+	width: 295px;
+	height: auto;
+	
+	margin: 100px auto;
+	padding: 20px 20px 9px;
+	
+	background: #1D5E4C;
+	border-radius: 3px;
+	box-shadow: 0px 4px #1D5E4C, 0px 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Top portion */
+.top span.clear {
+	float: left;
+}
+
+/* Inset shadow on the screen to create indent */
+.top .screen {
+	height: 40px;
+	width: 212px;
+	
+	float: left;
+	
+	padding: 0 10px;
+	
+	background: rgba(0, 0, 0, 0.2);
+	border-radius: 3px;
+	box-shadow: inset 0px 4px rgba(0, 0, 0, 0.2);
+	
+	/* Typography */
+	font-size: 17px;
+	line-height: 40px;
+	color: white;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+	text-align: right;
+	letter-spacing: 1px;
+}
+.top #clear{
+	margin: 5px 0 0 10px;
+}
+
+/* Clear floats */
+.keys, .top {overflow: hidden;}
+
+.panel{
+	height: 200px;
+	margin-top: 15px;
+	margin-right: auto;
+	margin-left: 5px;
+	width: 230px;
+	text-align: center;
+}
+.panel div{
+	float: left;
+}
+#num_pad{
+	width: 160px;
+	margin-right: 15px;
+}
+#op_pad{
+	width: 40px;
+	margin: auto;
+}
+.clear{
+	clear: both;
+}
+button{
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	margin: 0 20px 15px 0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	color: #1B4724;
+	font-size: 20px;
+	text-decoration: none;
+	cursor: pointer;
+	border: 1px outset;
+	font-family: "Courier New", Courier, monospace;
+}
+button:hover {
+	color: white;
+    background-color:#fb3c2d;
+    box-shadow: 0px 0px 1px #777;
+    border: 1px inset;
+}
+
+#cntrl_pad{
+	position: static;
+	margin-top: -45px;
+}
+#dec{
+	margin-right: 75px;
+}
+

@@ -14,46 +14,31 @@ function CalculatorView(model, elements) {
     var _this = this;
 
     // attach model listeners
-    this._model.exprChanged.attach(function (e) {
-        _this.updateScreen(e);
+    this._model.exprChanged.attach(function (sender, args) {
+        _this.updateScreen(args['expr']);
     });
 
     // attach listeners to HTML controls
     this._elements.numPad.onclick = function(e){
-        _this.numPadPressed.notify({ key: e });
+        _this.numPadPressed.notify({ e: e });
     };
     this._elements.opPad.onclick = function(e){
-        _this.opPadPressed.notify({ key: e });
+        _this.opPadPressed.notify({ e: e });
     };
     this._elements.clearPad.onclick = function(e){
-        _this.clearPressed.notify({ key: e });
+        _this.clearPressed.notify();
     };
     this._elements.evalPad.onclick = function(e){
-        _this.evalPressed.notify({ key: e });
+        _this.evalPressed.notify();
     };
 }
 
 CalculatorView.prototype = {
-    show : function (e) {
-        this.updateScreen(e);
+    show : function (expr) {
+        this.updateScreen(expr);
     },
 
-    updateScreen: function(e){
-        alert(e);
+    updateScreen: function(expr){
+        this._elements.screen.innerHTML = expr;
     },
-
-    // rebuildList : function () {
-    //     var list, items, key;
-
-    //     list = this._elements.list;
-    //     list.html('');
-
-    //     items = this._model.getItems();
-    //     for (key in items) {
-    //         if (items.hasOwnProperty(key)) {
-    //             list.append($('<option>' + items[key] + '</option>'));
-    //         }
-    //     }
-    //     this._model.setSelectedIndex(-1);
-    // }
 };
